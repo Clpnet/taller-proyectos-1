@@ -1,0 +1,8 @@
+fast-beat:
+  email-smtp-config:
+    host: smtp.gmail.com
+    user: email@company.com
+    clave: clave
+    auth: true
+    starttls-enable: true
+    port: 587
