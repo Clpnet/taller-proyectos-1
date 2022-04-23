@@ -28,9 +28,6 @@ public class ChoferController {
 	@ApiOperation(value = "Este método devuelve las unidades existentes")
 	@GetMapping
 	public JSONResultDTO<List<ChoferDTO>> findAll(){
-		Set<String> stringSet = new HashSet<>();
-		stringSet.add("paul.lugo.perez@gmail.com");
-		emailUtils.sendEmailWhitGmail(stringSet, "TEST SUBJECT", "<b>TEST BODY</b>");
 		return choferService.findAll();
 	}
 	
