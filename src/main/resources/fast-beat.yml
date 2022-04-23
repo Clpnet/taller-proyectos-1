@@ -1,8 +1,8 @@
 fast-beat:
   email-smtp-config:
     host: smtp.gmail.com
-    user: email@company.com
-    clave: clave
+    user: no.replay.fast.beat@gmail.com
+    clave: $fastbeat123
     auth: true
     starttls-enable: true
     port: 587

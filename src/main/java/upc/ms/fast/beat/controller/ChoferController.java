@@ -8,8 +8,11 @@ import upc.ms.fast.beat.config.FastBeatProperties;
 import upc.ms.fast.beat.service.IChoferService;
 import upc.ms.fast.beat.types.ChoferDTO;
 import upc.ms.fast.beat.types.JSONResultDTO;
+import upc.ms.fast.beat.utils.EmailUtils;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/chofer")
@@ -19,11 +22,15 @@ public class ChoferController {
 	@Autowired
 	private IChoferService choferService;
 
+	@Autowired
+	private EmailUtils emailUtils;
 
 	@ApiOperation(value = "Este método devuelve las unidades existentes")
 	@GetMapping
 	public JSONResultDTO<List<ChoferDTO>> findAll(){
-
+		Set<String> stringSet = new HashSet<>();
+		stringSet.add("paul.lugo.perez@gmail.com");
+		emailUtils.sendEmailWhitGmail(stringSet, "TEST SUBJECT", "<b>TEST BODY</b>");
 		return choferService.findAll();
 	}
 	
