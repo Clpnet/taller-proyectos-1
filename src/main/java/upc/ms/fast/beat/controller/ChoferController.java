@@ -19,13 +19,11 @@ public class ChoferController {
 	@Autowired
 	private IChoferService choferService;
 
-	@Autowired
-	private FastBeatProperties fastBeatProperties;
 
 	@ApiOperation(value = "Este método devuelve las unidades existentes")
 	@GetMapping
 	public JSONResultDTO<List<ChoferDTO>> findAll(){
-		fastBeatProperties.getEmailSmtpConfig();
+
 		return choferService.findAll();
 	}
 	
