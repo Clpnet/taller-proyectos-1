@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 import upc.ms.fast.beat.config.FastBeatProperties;
 
 import javax.mail.Message;
-import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
@@ -21,7 +20,6 @@ public class EmailUtils {
 
     @Autowired
     private FastBeatProperties fastBeatProperties;
-
 
     @Async
     public void sendEmailWhitGmail(Set<String> emailTo, String subject, String htmlBody){
