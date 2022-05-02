@@ -14,7 +14,9 @@ public interface IUnidadService {
 	public JSONResultDTO<UnidadDTO> save(UnidadDTO data) ;
 	
 	public JSONResultDTO<UnidadDTO> update(UnidadDTO data, int id);
-	
+
+	public JSONResultDTO<UnidadDTO> updatePerProp(UnidadDTO data, int id);
+
 	public JSONResultDTO<UnidadDTO> delete(int id);
 	
 	public JSONResultDTO<UnidadDTO> disabledUnity(int id) ;

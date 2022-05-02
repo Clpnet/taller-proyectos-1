@@ -19,6 +19,7 @@ public class UnidadDTO {
 	public String color ;
 	public String marca ;
 	public String  modelo; 
+	public Double  kilometraje;
 	public int sede_id;
 	public int estado_id;
 	

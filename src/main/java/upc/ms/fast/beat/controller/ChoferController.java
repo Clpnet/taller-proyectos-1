@@ -37,9 +37,7 @@ public class ChoferController {
 	public JSONResultDTO<ChoferDTO> findById(@PathVariable("id") int id){
 		return choferService.findById(id);
 	}
-	
-	
-	
+
 	@ApiOperation(value = "Permite crear las operaciones relacionadas a choferes ")
 	@PostMapping
 	public JSONResultDTO<ChoferDTO> save(@RequestBody ChoferDTO data){

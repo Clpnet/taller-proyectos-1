@@ -13,10 +13,12 @@ import javax.persistence.Id;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class DocumentoIdentidad {
+public class Parametros {
 
-	@Id
-	@GeneratedValue(strategy= GenerationType.IDENTITY)
-	public int id;
-	public String descripcion;
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    public  int id;
+    public String kmForNotification;
+    public String emailsForKmNoti;
+
 }

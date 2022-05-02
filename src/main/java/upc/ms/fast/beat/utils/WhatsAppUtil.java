@@ -6,6 +6,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import upc.ms.fast.beat.config.FastBeatProperties;
 
@@ -15,6 +16,7 @@ public class WhatsAppUtil {
     @Autowired
     private FastBeatProperties fastBeatProperties;
 
+    @Async
     public void sendWhatsApp(String numberTo, String body){
         Twilio.init(fastBeatProperties.getTwilioConfig().getSid(),
                 fastBeatProperties.getTwilioConfig().getToken());

@@ -37,16 +37,19 @@ public class UnidadController {
 		return unidadService.save(data);
 	}
 	
-	@DeleteMapping
+	@DeleteMapping("/{id}")
 	public JSONResultDTO<UnidadDTO> delete(@PathVariable(value = "id") int id) {
 		return unidadService.delete(id);
 	}
 	
-	@PutMapping
+	@PutMapping("/{id}")
 	public JSONResultDTO<UnidadDTO> update(@PathVariable(value="id") int id, @RequestBody UnidadDTO data ){
 		return unidadService.update(data, id);
 	}
-	
-	
+
+	@PatchMapping("/{id}")
+	public JSONResultDTO<UnidadDTO> updatePerProp(@PathVariable(value="id") int id, @RequestBody UnidadDTO data ){
+		return unidadService.updatePerProp(data, id);
+	}
 	
 }
