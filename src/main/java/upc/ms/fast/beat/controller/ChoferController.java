@@ -9,6 +9,7 @@ import upc.ms.fast.beat.service.IChoferService;
 import upc.ms.fast.beat.types.ChoferDTO;
 import upc.ms.fast.beat.types.JSONResultDTO;
 import upc.ms.fast.beat.utils.EmailUtils;
+import upc.ms.fast.beat.utils.WhatsAppUtil;
 
 import java.util.HashSet;
 import java.util.List;
@@ -23,7 +24,7 @@ public class ChoferController {
 	private IChoferService choferService;
 
 	@Autowired
-	private EmailUtils emailUtils;
+	private WhatsAppUtil whatsAppUtil;
 
 	@ApiOperation(value = "Este método devuelve las unidades existentes")
 	@GetMapping

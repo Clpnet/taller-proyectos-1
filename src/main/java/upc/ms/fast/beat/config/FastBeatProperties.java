@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 public class FastBeatProperties {
 
     private EmailSmtpConfig emailSmtpConfig;
+    private TwilioConfig twilioConfig;
 
     @Data
     public static class EmailSmtpConfig {
@@ -21,5 +22,12 @@ public class FastBeatProperties {
         private Boolean auth;
         private Boolean starttlsEnable;
         private Integer port;
+    }
+
+    @Data
+    public static class TwilioConfig{
+        private String sid;
+        private String token;
+        private String numberFrom;
     }
 }

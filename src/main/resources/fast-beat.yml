@@ -6,3 +6,7 @@ fast-beat:
     auth: true
     starttls-enable: true
     port: 587
+  twilio-config:
+    sid: AC206a01737609ec6e1b65ae7fc9cc9b71
+    token: 1e467d4fb71eddc65c5f7581d226419f
+    number-from: +14155238886
