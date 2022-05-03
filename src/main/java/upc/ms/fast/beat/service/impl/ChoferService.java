@@ -10,6 +10,7 @@ import upc.ms.fast.beat.service.IChoferService;
 import upc.ms.fast.beat.types.ChoferDTO;
 import upc.ms.fast.beat.types.JSONResultDTO;
 import upc.ms.fast.beat.utils.Mapper;
+import upc.ms.fast.beat.utils.WhatsAppUtil;
 
 import java.util.List;
 
@@ -17,8 +18,11 @@ import java.util.List;
 public class ChoferService implements IChoferService {
 
 	@Autowired
-	IChoferRepository choferRepository;
+	private IChoferRepository choferRepository;
 
+	@Autowired
+	private WhatsAppUtil whatsAppService;
+	
 	@Override
 	public JSONResultDTO<List<ChoferDTO>> findAll() {
 		
@@ -39,10 +43,16 @@ public class ChoferService implements IChoferService {
 		//if(u==null){ agregar lógica de validación} 
 	
 		c.enabled = !c.enabled;
-		msj = c.enabled==true ? "Se ha habilitado al chofer" : "Se ha deshabilitado al chofer";
+		msj = c.enabled==true ? "habilitada" : "deshabilitada";
+		
+		
+		String msjReturn = String.format("Estimado %s %s, su cuenta ha sido %s, "
+				+ "por favor comuniquese con su administrador",c.nombres,c.apellidos,msj);
+		
+		whatsAppService.sendWhatsApp("+51934758933",msjReturn);
 		
 		JSONResultDTO<ChoferDTO> result =
-				new JSONResultDTO<ChoferDTO>(Mapper.convertChoferDTO(c),msj,true);
+				new JSONResultDTO<ChoferDTO>(Mapper.convertChoferDTO(c),"success",true);
 		
 		return  result;
 	}
@@ -58,7 +68,7 @@ public class ChoferService implements IChoferService {
 		
 		
 		JSONResultDTO<ChoferDTO> result =
-				new JSONResultDTO<ChoferDTO>(Mapper.convertChoferDTO(c),"",true);
+				new JSONResultDTO<ChoferDTO>(Mapper.convertChoferDTO(c),"Se guardó el chofer",true);
 		
 		return result;
 	}

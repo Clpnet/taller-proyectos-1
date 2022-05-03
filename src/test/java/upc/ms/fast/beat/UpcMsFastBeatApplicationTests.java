@@ -3,10 +3,10 @@ package upc.ms.fast.beat;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+//@SpringBootTest
 class UpcMsFastBeatApplicationTests {
 
-	@Test
+	//8@Test
 	void contextLoads() {
 	}
 

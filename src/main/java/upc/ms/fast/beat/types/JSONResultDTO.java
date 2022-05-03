@@ -20,7 +20,6 @@ public class JSONResultDTO<T> {
 
 
 	public JSONResultDTO(String msj, boolean status) {
-		super();
 		this.msj = msj;
 		this.status = status;
 	}
