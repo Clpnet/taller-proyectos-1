@@ -12,6 +12,7 @@ import upc.ms.fast.beat.types.UnidadDTO;
 import java.util.List;
 
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/unidades")
 public class UnidadController {
