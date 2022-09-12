@@ -1,0 +1,839 @@
+---
+swagger: "2.0"
+info:
+  description: Expone todas las operaciones relacionadas a la pasarela de Authorization
+    para obtener los tokens de seguridad del SSO de Redhat.
+  version: 1.0.0
+  title: Authorization
+host: jch-ebpm-authorization-v1-des.ocpappdes.financiero.bco
+basePath: /
+tags:
+- name: Access
+  description: Funcionalidad que realiza operaciones para el obtener los tokens de
+    Seguridad del SSO de RedHat.
+paths:
+  /channel/ebpm/v1.0/authorization/access/auth-access-token:
+    post:
+      tags:
+      - Access
+      summary: Funcionalidad que obtiene el Access Token del SSO.
+      description: "# Implementation Notes\r\n\r\n### Acerca de la funcionalidad expuesta\r\
+        \nPara la Autorización, el servicio obtendrá el Access Token del SSO de RedHat.\r\
+        \n<br/>\r\n\r\n\r\n### URI de acceso a la API\r\n| Método | URI |\r\n|--------|-------------|\r\
+        \n|POST | \t/channel/ebpm/v1.0/authorization/access/auth-access-token\r\n\r\
+        \n<br/>\r\n\r\n### Precondiciones para el consumo de esta versión de la API\r\
+        \nNo aplica.\r\n\r\n<br/>\r\n\r\n### Headers\r\n| Header           | Ejemplo\
+        \                              | Obligatorio |\r\n|------------------|--------------------------------------|-------------|\r\
+        \n| Request-ID       | 550e8400-e29b-41d4-a716-446655440000 | S          \
+        \ |\r\n| request-date     | 2019-07-11T01:30:00.000-05:00        | S     \
+        \      | \r\n| app-code         | EBPM                                 | S\
+        \           |\r\n| caller-name      | authorization\r\n\r\n\r\n\r\n<br/>\r\
+        \n\r\n### Query parameters válidos en esta versión de la API\r\n\r\n<br/>\r\
+        \n\r\n### Usos válidos de query parameters\r\nNo aplica.\r\n\r\n\r\n<br/>\
+        \ \r\n\r\n### Variantes válidas del payload (cuerpo del mensaje)\r\n\r\n\r\
+        \n<pre>\r\n  {\r\n \"clientId\": \"ebpm\",\r\n  \"clientSecret\": \"9cd6db25-11e1-4bf2-9f1d-b2fa950bbb5d\"\
+        ,\r\n  \"grantType\": \"authorization_code\",\r\n  \"scope\": \"openid\",\r\
+        \n  \"code\": \"be40202b-90ae-4785-a169-68dc35193e4a.4e9ca7f4-b32f-4694-966a-4acaf8bae753.57ceac33-2051-4753-9e33-313e289e3ab3\"\
+        ,\r\n  \"redirectUri\": \"http://localhost:4200/auth\",\r\n  \"responseType\"\
+        : \"code\",\r\n  \"sessionId\": \"2900df62-0eed-40c0-b69b-9f4a678a02db\",\r\
+        \n  \"refreshToken\": \"eyJhbG.eyJiOjE9.xhsAq5zwkQ-PNLnmX\"\r\n  } \r\n</pre>\r\
+        \n\r\n<br/>\r\n\r\n### Lista de valores usados en esta versión de la API \r\
+        \nNo aplica.\r\n\r\n<br/>\r\n\r\n### Código de errores del Servicio en esta\
+        \ versión de la API\r\n| Código | Descripción |\r\n|--------|-------------|\r\
+        \n| JA0001 | Request Inválido. \r\n| JA0003 | Ocurrió un error en el Backend.\
+        \       \r\n\r\n<br/>"
+      operationId: getAuthAccessTokenUsingPOST
+      consumes:
+      - application/json
+      produces:
+      - application/stream+json
+      - application/json
+      parameters:
+      - name: Request-ID
+        in: query
+        description: Este campo es un valor estándar ya existente y será usado como
+          identificador.
+        required: true
+        type: string
+        x-example: 550e8400-e29b-41d4-a716-446655440000
+      - name: app-code
+        in: query
+        description: "Código de la aplicación que invoca el servicio. Se debe usar\
+          \ el código de 2 caracteres que tienen asignada las aplicaciones, puede\
+          \ ser el canal."
+        required: true
+        type: string
+      - name: app-name
+        in: query
+        description: El nombre de la aplicación que invoca el servicio.
+        required: false
+        type: string
+        x-example: HB
+      - in: body
+        name: authRequest
+        description: authRequest
+        required: true
+        schema:
+          $ref: '#/definitions/AuthRequest'
+      - name: caller-name
+        in: query
+        description: Nombre de la API que realiza la invocación al servicio.
+        required: true
+        type: string
+      - name: device-id
+        in: query
+        description: El Id del dispositivo que realiza la invocaciónal servicio.
+        required: false
+        type: string
+        x-example: POS-156790
+      - name: device-ip
+        in: query
+        description: La ip del dispositivo que realiza la invocación al servicio.
+        required: false
+        type: string
+        x-example: 132.184.66.162
+      - name: device-mac
+        in: query
+        description: El mac del dispositivo que realiza la invocación al servicio.
+        required: false
+        type: string
+        x-example: 10-65-30-36-48-04
+      - name: login
+        in: query
+        description: Este campo es el usuario de login de la aplicación.
+        required: false
+        type: string
+        x-example: UserSession
+      - name: request-date
+        in: query
+        description: Fecha de la petición
+        required: true
+        type: string
+      - name: server-ip
+        in: query
+        description: Este campo es un valor estándar ya existente y será usado como
+          identificador.
+        required: false
+        type: string
+        x-example: 172.16.1.100
+      - name: server-name
+        in: query
+        description: Este campo es un valor estándar ya existente y será usado como
+          identificador.
+        required: false
+        type: string
+        x-example: JARVISLP-0035
+      - name: session-UID
+        in: query
+        description: Este campo es un valor estándar ya existente y será usado como
+          identificador.
+        required: false
+        type: string
+        x-example: 771a9600-a87f-76b9-e716-853728760000
+      - name: start-date
+        in: query
+        description: Fecha del sistema
+        required: false
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/AuthResponse'
+        "400":
+          description: Se enviaron datos incorrectos.
+          examples:
+            ? ""
+            : |-
+              {
+                  "code": "JA0001",
+                  "description": "Request inválido",
+                  "errorType": "FUNCTIONAL",
+                  "exceptionDetails": [
+                     {
+                          "component": "jarvis-channel-ebpm-v1.0",
+                          "description": "Ocurrió un problema. Inténtalo de nuevo.",
+                          "endpoint": "[POST] /channel/ebpm/v1.0/authorization/access/auth-access-token  "
+                      }
+                  ]
+              }
+          schema:
+            $ref: '#/definitions/JarvisException400'
+        "500":
+          description: Error al realizar la consulta de datos.
+          examples:
+            ? ""
+            : "{\n    \"code\": \"JA0002\",\n    \"description\": \"Error al llamar\
+              \ al servicio.\", \n    \"errorType\": \"TECHNICAL\",\n    \"exceptionDetails\"\
+              : [\n       {\n            \"component\": \"jarvis-channel-ebpm-v1.0\"\
+              ,\n            \"description\": \"Ocurrió un problema. Inténtalo de\
+              \ nuevo.\",\n            \"endpoint\": \"[POST] /channel/ebpm/v1.0/authorization/access/auth-access-token\
+              \  \"\n        }\n    ]\n}"
+          schema:
+            $ref: '#/definitions/JarvisException500'
+      deprecated: false
+  /channel/ebpm/v1.0/authorization/access/auth-refresh-token:
+    post:
+      tags:
+      - Access
+      summary: Funcionalidad que obtiene el Refresh Token del SSO.
+      description: "# Implementation Notes\r\n\r\n### Acerca de la funcionalidad expuesta\r\
+        \nPara la autorización, el servicio obtendrá el Refresh Token del SSO de RedHat.\r\
+        \n<br/>\r\n\r\n\r\n### URI de acceso a la API\r\n| Método | URI |\r\n|--------|-------------|\r\
+        \n|POST | \t/channel/ebpm/v1.0/authorization/access/auth-refresh-token\r\n\
+        \r\n<br/>\r\n\r\n### Precondiciones para el consumo de esta versión de la\
+        \ API\r\nNo aplica.\r\n\r\n<br/>\r\n\r\n### Headers\r\n| Header          \
+        \ | Ejemplo                              | Obligatorio |\r\n|------------------|--------------------------------------|-------------|\r\
+        \n| Request-ID       | 550e8400-e29b-41d4-a716-446655440000 | S          \
+        \ |\r\n| request-date     | 2019-07-11T01:30:00.000-05:00        | S     \
+        \      | \r\n| app-code         | EBPM                                 | S\
+        \           |\r\n| caller-name      | authorization\r\n\r\n\r\n\r\n<br/>\r\
+        \n\r\n### Query parameters válidos en esta versión de la API\r\n\r\n<br/>\r\
+        \n\r\n### Usos válidos de query parameters\r\n\r\nNo aplica.\r\n\r\n\r\n<br/>\
+        \ \r\n\r\n### Variantes válidas del payload (cuerpo del mensaje)\r\n\r\n\r\
+        \n<pre>\r\n  {\r\n \"clientId\": \"ebpm\",\r\n  \"clientSecret\": \"9cd6db25-11e1-4bf2-9f1d-b2fa950bbb5d\"\
+        ,\r\n  \"grantType\": \"authorization_code\",\r\n  \"scope\": \"openid\",\r\
+        \n  \"code\": \"be40202b-90ae-4785-a169-68dc35193e4a.4e9ca7f4-b32f-4694-966a-4acaf8bae753.57ceac33-2051-4753-9e33-313e289e3ab3\"\
+        ,\r\n  \"redirectUri\": \"http://localhost:4200/auth\",\r\n  \"responseType\"\
+        : \"code\",\r\n  \"sessionId\": \"2900df62-0eed-40c0-b69b-9f4a678a02db\",\r\
+        \n  \"refreshToken\": \"eyJhbG.eyJiOjE9.xhsAq5zwkQ-PNLnmX\"\r\n  } \r\n</pre>\r\
+        \n\r\n<br/>\r\n\r\n### Lista de valores usados en esta versión de la API\r\
+        \nNo aplica.\r\n\r\n<br/>\r\n\r\n### Código de errores del Servicio en esta\
+        \ versión de la API\r\n| Código | Descripción |\r\n|--------|-------------|\r\
+        \n| JA0001 | Request Inválido.\r\n| JA0003 | Ocurrió un error en el Backend.\r\
+        \n\r\n<br/>"
+      operationId: getAuthRefreshTokenUsingPOST
+      consumes:
+      - application/json
+      produces:
+      - application/stream+json
+      - application/json
+      - application/x-www-form-urlencoded
+      parameters:
+      - name: Request-ID
+        in: query
+        description: Este campo es un valorestándar ya existente y será  usado como
+          identificador.
+        required: true
+        type: string
+        x-example: 550e8400-e29b-41d4-a716-446655440000
+      - name: app-code
+        in: query
+        description: "Código de la aplicación que invoca el servicio. Se debe usar\
+          \ el código de 2 caracteres que tienen asignada las aplicaciones, puede\
+          \ ser el canal."
+        required: true
+        type: string
+      - name: app-name
+        in: query
+        description: El nombre de la aplicación que invoca el servicio.
+        required: false
+        type: string
+        x-example: HB
+      - in: body
+        name: authRequest
+        description: authRequest
+        required: true
+        schema:
+          $ref: '#/definitions/AuthRequest'
+      - name: caller-name
+        in: query
+        description: Nombre de la API que realiza la invocación al servicio.
+        required: true
+        type: string
+      - name: device-id
+        in: query
+        description: El Id del dispositivo que realiza la invocación al servicio.
+        required: false
+        type: string
+        x-example: POS-156790
+      - name: device-ip
+        in: query
+        description: La ip del dispositivo que realiza la invocación al servicio.
+        required: false
+        type: string
+        x-example: 132.184.66.162
+      - name: device-mac
+        in: query
+        description: El mac del dispositivo que realiza la invocación al servicio.
+        required: false
+        type: string
+        x-example: 10-65-30-36-48-04
+      - name: login
+        in: query
+        description: Este campo es el usuario de login de la aplicación.
+        required: false
+        type: string
+        x-example: UserSession
+      - name: request-date
+        in: query
+        description: Fecha de la petición
+        required: true
+        type: string
+      - name: server-ip
+        in: query
+        description: Este campo es un valor estándar ya existente y será usado como
+          identificador.
+        required: false
+        type: string
+        x-example: 172.16.1.100
+      - name: server-name
+        in: query
+        description: Este campo es un valor estándar ya existente y será usado como
+          identificador.
+        required: false
+        type: string
+        x-example: JARVISLP-0035
+      - name: session-UID
+        in: query
+        description: Este campo es un valor estándar ya existente y será usado como
+          identificador.
+        required: false
+        type: string
+        x-example: 771a9600-a87f-76b9-e716-853728760000
+      - name: start-date
+        in: query
+        description: Fecha del sistema
+        required: false
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/AuthResponse'
+        "400":
+          description: Se enviaron datos incorrectos.
+          examples:
+            ? ""
+            : |-
+              {
+                  "code": "JA0001",
+                  "description": "Request inválido",
+                  "errorType": "FUNCTIONAL",
+                  "exceptionDetails": [
+                     {
+                          "component": "jarvis-channel-ebpm-v1.0",
+                          "description": "Ocurrió un problema. Inténtalo de nuevo.",
+                          "endpoint": "[POST] /channel/ebpm/v1.0/authorization/access/auth-refresh-token"
+                      }
+                  ]
+              }
+          schema:
+            $ref: '#/definitions/JarvisException400_1'
+        "500":
+          description: Error al realizar la consulta de datos.
+          examples:
+            ? ""
+            : "{\n    \"code\": \"JA0002\",\n    \"description\": \"Error al llamar\
+              \ al servicio.\", \n    \"errorType\": \"TECHNICAL\",\n    \"exceptionDetails\"\
+              : [\n       {\n            \"component\": \"jarvis-channel-ebpm-v1.0\"\
+              ,\n            \"description\": \"Ocurrió un problema. Inténtalo de\
+              \ nuevo.\",\n            \"endpoint\": \"[POST] /channel/ebpm/v1.0/authorization/access/auth-refresh-token\"\
+              \n        }\n    ]\n}"
+          schema:
+            $ref: '#/definitions/JarvisException500_1'
+      deprecated: false
+  /channel/ebpm/v1.0/authorization/access/auth-logout-token:
+    post:
+      tags:
+      - Access
+      summary: Funcionalidad que obtiene el Logout Token del SSO.
+      description: "# Implementation Notes\r\n\r\n### Acerca de la funcionalidad expuesta\r\
+        \nPara la autorización, el servicio obtendrá el Logout Token del SSO de RedHat.\r\
+        \n<br/>\r\n\r\n\r\n### URI de acceso a la API\r\n| Método | URI |\r\n|--------|-------------|\r\
+        \n|POST | \t/channel/ebpm/v1.0/authorization/access/auth-logout-token\r\n\r\
+        \n<br/>\r\n\r\n### Precondiciones para el consumo de esta versión de la API\r\
+        \nNo aplica.\r\n\r\n<br/>\r\n\r\n### Headers\r\n| Header           | Ejemplo\
+        \                              | Obligatorio |\r\n|------------------|--------------------------------------|-------------|\r\
+        \n| Request-ID       | 550e8400-e29b-41d4-a716-446655440000 | S          \
+        \ |\r\n| request-date     | 2019-07-11T01:30:00.000-05:00        | S     \
+        \      | \r\n| app-code         | EBPM                                 | S\
+        \           |\r\n| caller-name      | authorization\r\n\r\n\r\n\r\n<br/>\r\
+        \n\r\n### Query parameters válidos en esta versión de la API\r\n\r\n<br/>\r\
+        \n\r\n### Usos válidos de query parameters\r\n\r\nNo aplica.\r\n\r\n\r\n<br/>\
+        \ \r\n\r\n### Variantes válidas del payload (cuerpo del mensaje)\r\n\r\n\r\
+        \n<pre>\r\n  {\r\n  \"clientId\": \"ebpm\",\r\n  \"clientSecret\": \"9cd6db25-11e1-4bf2-9f1d-b2fa950bbb5d\"\
+        ,\r\n  \"grantType\": \"authorization_code\",\r\n  \"scope\": \"openid\",\r\
+        \n  \"code\": \"be40202b-90ae-4785-a169-68dc35193e4a.4e9ca7f4-b32f-4694-966a-4acaf8bae753.57ceac33-2051-4753-9e33-313e289e3ab3\"\
+        ,\r\n  \"redirectUri\": \"http://localhost:4200/auth\",\r\n  \"responseType\"\
+        : \"code\",\r\n  \"sessionId\": \"2900df62-0eed-40c0-b69b-9f4a678a02db\",\r\
+        \n  \"refreshToken\": \"eyJhbG.eyJiOjE9.xhsAq5zwkQ-PNLnmX\"\r\n  } \r\n</pre>\r\
+        \n\r\n<br/>\r\n\r\n### Lista de valores usados en esta versión de la API\r\
+        \nNo aplica.\r\n\r\n<br/>\r\n\r\n### Código de errores del Servicio en esta\
+        \ versión de la API\r\n| Código | Descripción |\r\n|--------|-------------|\r\
+        \n| JA0001 | Request Inválido.\r\n| JA0003 | Ocurrió un error en el Backend.\r\
+        \n\r\n<br/>"
+      operationId: getAuthLogoutUsingPOST
+      consumes:
+      - application/json
+      produces:
+      - application/stream+json
+      - application/json
+      - application/x-www-form-urlencoded
+      parameters:
+      - name: Request-ID
+        in: query
+        description: Este campo es un valor estándar ya existente y será usado como
+          identificador.
+        required: true
+        type: string
+        x-example: 550e8400-e29b-41d4-a716-446655440000
+      - name: app-code
+        in: query
+        description: "Código de la aplicación que invoca el servicio. Se debe usar\
+          \ el código de 2 caracteres que tienen asignada las aplicaciones, puede\
+          \ ser el canal."
+        required: true
+        type: string
+      - name: app-name
+        in: query
+        description: El nombre de la aplicación que invoca el servicio.
+        required: false
+        type: string
+        x-example: HB
+      - in: body
+        name: authRequest
+        description: authRequest
+        required: true
+        schema:
+          $ref: '#/definitions/AuthRequest'
+      - name: caller-name
+        in: query
+        description: Nombre de la API que realiza la invocación al servicio.
+        required: true
+        type: string
+      - name: device-id
+        in: query
+        description: El Id del dispositivo que realiza la invocación al servicio.
+        required: false
+        type: string
+        x-example: POS-156790
+      - name: device-ip
+        in: query
+        description: La ip del dispositivo que realiza la invocación al servicio.
+        required: false
+        type: string
+        x-example: 132.184.66.162
+      - name: device-mac
+        in: query
+        description: El mac del dispositivo que realiza la invocación al servicio.
+        required: false
+        type: string
+        x-example: 10-65-30-36-48-04
+      - name: login
+        in: query
+        description: Este campo es el usuario de login de la aplicación.
+        required: false
+        type: string
+        x-example: UserSession
+      - name: request-date
+        in: query
+        description: Fecha de la petición
+        required: true
+        type: string
+      - name: server-ip
+        in: query
+        description: Este campo es un valorestándar ya existente y será usado como
+          identificador.
+        required: false
+        type: string
+        x-example: 172.16.1.100
+      - name: server-name
+        in: query
+        description: Este campo es un valor estándar ya existente y será usado como
+          identificador.
+        required: false
+        type: string
+        x-example: JARVISLP-0035
+      - name: session-UID
+        in: query
+        description: Este campo es un valor estándar ya existente y será usado como
+          identificador.
+        required: false
+        type: string
+        x-example: 771a9600-a87f-76b9-e716-853728760000
+      - name: start-date
+        in: query
+        description: Fecha del sistema
+        required: false
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/AuthResponse'
+        "400":
+          description: Se enviaron datos incorrectos.
+          examples:
+            ? ""
+            : |-
+              {
+                  "code": "JA0001",
+                  "description": "Request inválido",
+                  "errorType": "FUNCTIONAL",
+                  "exceptionDetails": [
+                     {
+                          "component": "jarvis-channel-ebpm-v1.0",
+                          "description": "Ocurrió un problema. Inténtalo de nuevo.",
+                          "endpoint": "[POST] /channel/ebpm/v1.0/authorization/access/auth-logout-token"
+                      }
+                  ]
+              }
+          schema:
+            $ref: '#/definitions/JarvisException400_2'
+        "500":
+          description: Error al realizar la consulta de datos.
+          examples:
+            ? ""
+            : "{\n    \"code\": \"JA0002\",\n    \"description\": \"Error al llamar\
+              \ al servicio.\", \n    \"errorType\": \"TECHNICAL\",\n    \"exceptionDetails\"\
+              : [\n       {\n            \"component\": \"jarvis-channel-ebpm-v1.0\"\
+              ,\n            \"description\": \"Ocurrió un problema. Inténtalo de\
+              \ nuevo.\",\n            \"endpoint\": \"[POST] /channel/ebpm/v1.0/authorization/access/auth-logout-token\"\
+              \n        }\n    ]\n}"
+          schema:
+            $ref: '#/definitions/JarvisException500_2'
+      deprecated: false
+definitions:
+  AuthRequest:
+    type: object
+    properties:
+      clientId:
+        type: string
+        example: ebpm
+        description: "Valor del Identificador del Cliente para la llamada al SSO :\
+          \ client_id"
+      clientSecret:
+        type: string
+        example: 9cd6db25-11e1-4bf2-9f1d-b2fa950bbb5d
+        description: "Valor del token de secreto del cliente para la llamada al SSO\
+          \ : client_secret"
+      grantType:
+        type: string
+        example: authorization_code
+        description: "Valor del tipo de autorización para la llamada al SSO : grant_type"
+      scope:
+        type: string
+        example: openid
+        description: "Valor para el scope para la llamada al SSO : scope"
+      code:
+        type: string
+        example: be40202b-90ae-4785-a169-68dc35193e4a.4e9ca7f4-b32f-4694-966a-4acaf8bae753.57ceac33-2051-4753-9e33-313e289e3ab3
+        description: "Valor del token de Código para la llamada al SSO : code"
+      redirectUri:
+        type: string
+        example: http://localhost:4200/auth
+        description: Valor de la URI a redireccionar para la llamada al SSO :redirect_uri
+      responseType:
+        type: string
+        example: code
+        description: Valor del tipo de response  para la llamada al SSO :response_type
+      sessionId:
+        type: string
+        example: 2900df62-0eed-40c0-b69b-9f4a678a02db
+        description: "Código de la sesión para la llamada al SSO : sessionId"
+      refreshToken:
+        type: string
+        example: eyJhbG.eyJiOjE9.xhsAq5zwkQ-PNLnmX
+        description: "Código del Refresh Token para la llamada al SSO : refresh_token"
+    title: AuthRequest
+  AuthResponse:
+    type: object
+    properties:
+      accessToken:
+        type: string
+        example: eyJhbG.eyJiOjE9.xhsAq5zwkQ-PNLnmX
+        description: Valor del Access token para la llamada al SSO
+      expiresIn:
+        type: integer
+        example: 300
+        description: Tiempo de Expiración del token para la llamada al SSO
+      refreshExpiresIn:
+        type: integer
+        example: 1800
+        description: Tiempo de refrescado del Token para la llamada al SSO
+      refreshToken:
+        type: string
+        example: eyJhbG.eyJiOjE9.xhsAq5zwkQ-PNLnmX
+        description: Código de Refrescado del Token para la llamada al SSO
+      tokenType:
+        type: string
+        example: bearer
+        description: Tipo de Token para la llamada al SSO
+      notBeforePolicy:
+        type: integer
+        example: 0
+        description: 'Estado ''No Before Policy'' para la llamada al SSO '
+      sessionState:
+        type: string
+        example: 4e9ca7f4-b32f-4694-966a-4acaf8bae753
+        description: Estado de Sesión para la llamada al SSO
+      scope:
+        type: string
+        example: profile email
+        description: Scope para la llamada al SSO
+    title: AuthResponse
+  JarvisException400:
+    type: object
+    discriminator: Datos del error de sistema.
+    properties:
+      code:
+        type: string
+        example: JA0001
+        description: Código de error de Sistema
+      description:
+        type: string
+        example: Request Inválido.
+        description: Descripción del error de Sistema
+      errorType:
+        type: string
+        example: GENERAL
+        description: Tipo de Error de Sistema
+      exceptionDetails:
+        type: array
+        description: Lista de detalles del error
+        items:
+          $ref: '#/definitions/JarvisExceptionDetail400'
+      properties:
+        type: object
+        description: Lista de propiedades especiales.
+    title: JarvisException
+    description: Datos del error de sistema.
+  JarvisException500:
+    type: object
+    discriminator: Datos del error de sistema.
+    properties:
+      code:
+        type: string
+        example: JA0003
+        description: Código de error de Sistema
+      description:
+        type: string
+        example: Error al llamar al servicio
+        description: Descripción del error de Sistema
+      errorType:
+        type: string
+        example: TECHNICAL
+        description: Tipo de Error de Sistema
+      exceptionDetails:
+        type: array
+        description: Lista de detalles del error
+        items:
+          $ref: '#/definitions/JarvisExceptionDetail500'
+      properties:
+        type: object
+        description: Lista de propiedades especiales.
+    title: JarvisException
+    description: Datos del error de sistema.
+  JarvisExceptionDetail400:
+    type: object
+    discriminator: Datos del error t&eacute;cnico.
+    properties:
+      component:
+        type: string
+        example: jarvis-channel-ebpm-v1.0
+        description: Nombre del componente de falla
+      description:
+        type: string
+        example: Código inválido para el canal
+        description: Descripción del Detalle
+      endpoint:
+        type: string
+        example: "[POST] /channel/ebpm/v1.0/authorization/access/auth-access-token"
+        description: Endpoint que ejecuta el servicio
+    title: JarvisExceptionDetail
+    description: Datos del error t&eacute;cnico.
+  JarvisExceptionDetail500:
+    type: object
+    discriminator: Datos del error t&eacute;cnico.
+    properties:
+      component:
+        type: string
+        example: jarvis-channel-ebpm-v1.0
+        description: Nombre del componente de falla
+      description:
+        type: string
+        example: Ocurrió un error inesperado en el Backend.
+        description: Descripción del Detalle
+      endpoint:
+        type: string
+        example: "[POST] /channel/ebpm/v1.0/authorization/access/auth-access-token"
+        description: Endpoint que ejecuta el servicio
+    title: JarvisExceptionDetail
+    description: Datos del error t&eacute;cnico.
+  JarvisException400_1:
+    type: object
+    discriminator: Datos del error de sistema.
+    properties:
+      code:
+        type: string
+        example: JA0001
+        description: Código de error de Sistema
+      description:
+        type: string
+        example: Request Inválido.
+        description: Descripción del error de Sistema
+      errorType:
+        type: string
+        example: GENERAL
+        description: Tipo de Error de Sistema
+      exceptionDetails:
+        type: array
+        description: Lista de detalles del error
+        items:
+          $ref: '#/definitions/JarvisExceptionDetail400_1'
+      properties:
+        type: object
+        description: Lista de propiedades especiales.
+    title: JarvisException
+    description: Datos del error de sistema.
+  JarvisException500_1:
+    type: object
+    discriminator: Datos del error de sistema.
+    properties:
+      code:
+        type: string
+        example: JA0003
+        description: Código de error de Sistema
+      description:
+        type: string
+        example: Error al llamar al servicio
+        description: Descripción del error de Sistema
+      errorType:
+        type: string
+        example: TECHNICAL
+        description: Tipo de Error de Sistema
+      exceptionDetails:
+        type: array
+        description: Lista de detalles del error
+        items:
+          $ref: '#/definitions/JarvisExceptionDetail500_1'
+      properties:
+        type: object
+        description: Lista de propiedades especiales.
+    title: JarvisException
+    description: Datos del error de sistema.
+  JarvisExceptionDetail400_1:
+    type: object
+    discriminator: Datos del error t&eacute;cnico.
+    properties:
+      component:
+        type: string
+        example: jarvis-channel-ebpm-v1.0
+        description: Nombre del componente de falla
+      description:
+        type: string
+        example: Código inválido para el canal
+        description: Descripción del Detalle
+      endpoint:
+        type: string
+        example: "[POST] /channel/ebpm/v1.0/authorization/access/auth-refresh-token"
+        description: Endpoint que ejecuta el servicio
+    title: JarvisExceptionDetail
+    description: Datos del error t&eacute;cnico.
+  JarvisExceptionDetail500_1:
+    type: object
+    discriminator: Datos del error t&eacute;cnico.
+    properties:
+      component:
+        type: string
+        example: jarvis-channel-ebpm-v1.0
+        description: Nombre del componente de falla
+      description:
+        type: string
+        example: Ocurrió un error inesperado en el Backend.
+        description: Descripción del Detalle
+      endpoint:
+        type: string
+        example: "[POST] /channel/ebpm/v1.0/authorization/access/auth-refresh-token"
+        description: Endpoint que ejecuta el servicio
+    title: JarvisExceptionDetail
+    description: Datos del error t&eacute;cnico.
+  JarvisException400_2:
+    type: object
+    discriminator: Datos del error de sistema.
+    properties:
+      code:
+        type: string
+        example: JA0001
+        description: Código de error de Sistema
+      description:
+        type: string
+        example: Request Inválido.
+        description: Descripción del error de Sistema
+      errorType:
+        type: string
+        example: GENERAL
+        description: Tipo de Error de Sistema
+      exceptionDetails:
+        type: array
+        description: Lista de detalles del error
+        items:
+          $ref: '#/definitions/JarvisExceptionDetail400_2'
+      properties:
+        type: object
+        description: Lista de propiedades especiales.
+    title: JarvisException
+    description: Datos del error de sistema.
+  JarvisException500_2:
+    type: object
+    discriminator: Datos del error de sistema.
+    properties:
+      code:
+        type: string
+        example: JA0003
+        description: Código de error de Sistema
+      description:
+        type: string
+        example: Error al llamar al servicio
+        description: Descripción del error de Sistema
+      errorType:
+        type: string
+        example: TECHNICAL
+        description: Tipo de Error de Sistema
+      exceptionDetails:
+        type: array
+        description: Lista de detalles del error
+        items:
+          $ref: '#/definitions/JarvisExceptionDetail500_2'
+      properties:
+        type: object
+        description: Lista de propiedades especiales.
+    title: JarvisException
+    description: Datos del error de sistema.
+  JarvisExceptionDetail400_2:
+    type: object
+    discriminator: Datos del error t&eacute;cnico.
+    properties:
+      component:
+        type: string
+        example: jarvis-channel-ebpm-v1.0
+        description: Nombre del componente de falla
+      description:
+        type: string
+        example: Código inválido para el canal
+        description: Descripción del Detalle
+      endpoint:
+        type: string
+        example: "[POST] /channel/ebpm/v1.0/authorization/access/auth-logout-token"
+        description: Endpoint que ejecuta el servicio
+    title: JarvisExceptionDetail
+    description: Datos del error t&eacute;cnico.
+  JarvisExceptionDetail500_2:
+    type: object
+    discriminator: Datos del error t&eacute;cnico.
+    properties:
+      component:
+        type: string
+        example: jarvis-channel-ebpm-v1.0
+        description: Nombre del componente de falla
+      description:
+        type: string
+        example: Ocurrió un error inesperado en el Backend.
+        description: Descripción del Detalle
+      endpoint:
+        type: string
+        example: "[POST] /channel/ebpm/v1.0/authorization/access/auth-logout-token"
+        description: Endpoint que ejecuta el servicio
+    title: JarvisExceptionDetail
+    description: Datos del error t&eacute;cnico.
